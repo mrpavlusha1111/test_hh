@@ -1,0 +1,17 @@
+﻿1. GET https://api.hh.ru/areas, returns 200 and list of areas, verify the structure of response;
+2. GET https://api.hh.ru/area, returns 404 not found;
+3. POST, PUT https://api.hh.ru/areas - failed;
+4. GET https://api.hh.ru/employers?area=113&text=”Новые Облачные” returns 200 and info for company “Новые Облачные Технологии”, verify the structure of response;
+5. POST, PUT https://api.hh.ru/employers?area=113&text=”Новые Облачные”  are failed;
+6. GET https://api.hh.ru/employers?area=”absd”&text=”Новые Облачные” returns 404 bad request;
+7. GET https://api.hh.ru/employers?area=-1&text=”Новые Облачные” returns 404 bad request;
+8. GET https://api.hh.ru/employers?areaww=113&text=”Новые Облачные” returns 200 Ok, parameter with incorrect name was skipped(result = as if https://api.hh.ru/employers?text=”Новые Облачные”)
+9. GET https://api.hh.ru/employers?area=113&texxxt=”Новые Облачные” returns 200 Ok, parameter with incorrect name was skipped(result = as if https://api.hh.ru/employers?area=113);
+10. GET https://api.hh.ru/employers?area=113&area=1&text=”Новые Облачные” returns 200 Ok and list of employers from both regions;
+11. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113&employer_id=213397 returns 200 Ok, verify the structure of response;
+12. POST, PUT  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113&employer_id=213397 are failed;
+13. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=-1&employer_id=213397 returns 404 bad request;
+14. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=”sdsds”&employer_id=213397 returns 404 bad request;
+15. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113&employer_id=-1 returns 404 bad request;
+16. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&arqea=113&employer_id=213397 returns 200 Ok,  parameter with incorrect name was skipped(result = as if https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&employer_id=213397;
+17. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113&empldddoyer_id=213397 returns 200 Ok,  parameter with incorrect name was skipped(result = as if GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113)
