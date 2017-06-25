@@ -36,23 +36,28 @@ def test3():
 
 def test4():
     """
-    test4: Positive: GET https://api.hh.ru/employers?area=113&text='Новые Облачные технологии'
+    test4: Positive: GET https://api.hh.ru/employers?area=113&text='Новые Облачные'
+    expected company is found
     validate the structure of response
     """
     russia_id = hh.get_country(u"Россия", DOMAIN_NAME)
+    expected_company_name = u"Новые Облачные Технологии"
     if russia_id == -1:
-        raise AssertionError('verify containment')
-    response = hh.create_and_send_get_request('https', DOMAIN_NAME + '/employers', 200, area=russia_id, text=u"Новые облачные").json()
+        raise AssertionError('verify containment of areas')
+    response = hh.create_and_send_get_request('https', DOMAIN_NAME + '/employers', 200, area=russia_id, text=u"Новые Облачные").json()
 
     employers_template = {'found': 0, 'per_page': 0, 'page': 0, 'pages': 0, 'items': [{'name': u"", 'id': u"",
                                                                                        'url': u"", 'alternate_url': u"", 'vacancies_url': u"",
                                                                                        'open_vacancies': 0, 'logo_urls': {}}]}
+    if response['items'][0]['name'] != expected_company_name:
+        raise AssertionError('no company{}'.format(expected_company_name.encode('utf-8')))
     hh.validate_response([response], employers_template)
+
 
 
 def test5():
     """
-    test5: Negative: GET https://api.hh.ru/employers?area='and'&text='Новые Облачные технологии
+    test5: Negative: GET https://api.hh.ru/employers?area='and'&text='Новые Облачные'
     400 not found should return
     """
     hh.create_and_send_get_request('https', DOMAIN_NAME + '/employers', 400, area="ndfrfr", text=u"Новые облачные").json()
