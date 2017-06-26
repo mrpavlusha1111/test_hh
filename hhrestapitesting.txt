@@ -1,17 +1,25 @@
-﻿1. GET https://api.hh.ru/areas, returns 200 and list of areas, verify the structure of response;
-2. GET https://api.hh.ru/area, returns 404 not found;
-3. POST, PUT https://api.hh.ru/areas - failed;
-4. GET https://api.hh.ru/employers?area=113&text=”Новые Облачные” returns 200 and info for company “Новые Облачные Технологии”, verify the structure of response;
-5. POST, PUT https://api.hh.ru/employers?area=113&text=”Новые Облачные”  are failed;
-6. GET https://api.hh.ru/employers?area=”absd”&text=”Новые Облачные” returns 404 bad request;
-7. GET https://api.hh.ru/employers?area=-1&text=”Новые Облачные” returns 404 bad request;
-8. GET https://api.hh.ru/employers?areaww=113&text=”Новые Облачные” returns 200 Ok, parameter with incorrect name was skipped(result = as if https://api.hh.ru/employers?text=”Новые Облачные”)
-9. GET https://api.hh.ru/employers?area=113&texxxt=”Новые Облачные” returns 200 Ok, parameter with incorrect name was skipped(result = as if https://api.hh.ru/employers?area=113);
-10. GET https://api.hh.ru/employers?area=113&area=1&text=”Новые Облачные” returns 200 Ok and list of employers from both regions;
-11. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113&employer_id=213397 returns 200 Ok, verify the structure of response;
-12. POST, PUT  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113&employer_id=213397 are failed;
-13. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=-1&employer_id=213397 returns 404 bad request;
-14. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=”sdsds”&employer_id=213397 returns 404 bad request;
-15. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113&employer_id=-1 returns 404 bad request;
-16. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&arqea=113&employer_id=213397 returns 200 Ok,  parameter with incorrect name was skipped(result = as if https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&employer_id=213397;
-17. GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113&empldddoyer_id=213397 returns 200 Ok,  parameter with incorrect name was skipped(result = as if GET  https://api.hh.ru/vacancies?text=%22QA%20Automation%20engineer%22&area=113)
+﻿1. GET https://api.hh.ru/areas returns 200 ok and list of areas, verify the response: structure and types of parameters;
+2. GET https://api.hh.ru/area returns 404 not found;
+3. POST, PUT https://api.hh.ru/areas - failed to update areas with this requests;
+4. GET https://api.hh.ru/area - check the containment, validate that "Россия" region is presented;
+5. GET https://api.hh.ru/employers?area=113&text="Новые Облачные" returns 200 Ok and info for company "Новые Облачные Технологии", 
+verify the response: structure and types of parameters;
+6. POST, PUT https://api.hh.ru/employers?area=113&text="Новые Облачные" are failed to update employers with this requests;
+7. GET https://api.hh.ru/employer returns 404 not found;
+8. GET https://api.hh.ru/employers?area="absd"&text="Новые Облачные" returns 404 bad request;
+9. GET https://api.hh.ru/employers?area=-1&text="Новые Облачные" returns 404 bad request;
+10. GET https://api.hh.ru/employers?areaww=113&text=Новые Облачные" returns 200 Ok, 
+parameter with incorrect name was skipped(result = as if https://api.hh.ru/employers?text=”Новые Облачные”);
+11. GET https://api.hh.ru/employers?area=113&texxxt="Новые Облачные" returns 200 Ok, 
+parameter with incorrect name was skipped(result = as if https://api.hh.ru/employers?area=113);
+12. GET https://api.hh.ru/employers?area=113&area=1&text="Новые Облачные" returns 200 Ok and list of employers from both regions;
+13. GET  https://api.hh.ru/vacancies?text="QA Automation engineer"&area=113&employer_id=213397 returns 200 Ok, verify the structure of response;
+14. POST, PUT  https://api.hh.ru/vacancies?text="QA Automation engineer"&area=113&employer_id=213397 are failed to update vacancies with this requests
+15. GET  https://api.hh.ru/vacancy returns 404 not found;
+16. GET  https://api.hh.ru/vacancies?text="QA Automation engineer"&area=-1&employer_id=213397 returns 404 bad request;
+17. GET  https://api.hh.ru/vacancies?text="QA Automation engineer"&area="sdsds"&employer_id=213397 returns 404 bad request;
+18. GET  https://api.hh.ru/vacancies?text="QA Automation engineer"&area=113&employer_id=-1 returns 404 bad request;
+19. GET  https://api.hh.ru/vacancies?text="QA Automation engineer"&arqea=113&employer_id=213397 returns 200 Ok, 
+parameter with incorrect name was skipped(result = as if https://api.hh.ru/vacancies?text="QA Automation engineer"&employer_id=213397;
+20. GET  https://api.hh.ru/vacancies?text="QA Automation engineer"&area=113&empldddoyer_id=213397 returns 200 Ok, 
+parameter with incorrect name was skipped(result = as if GET  https://api.hh.ru/vacancies?text="QA Automation engineer"&area=113);
